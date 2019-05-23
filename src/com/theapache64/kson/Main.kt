@@ -29,9 +29,11 @@ fun main() {
 
     val imports = kson.imports // String[] of import statements
     println("Imports are : $imports")
-    
-    // val parentClass = kson.parentClass // BaseAppCompatActivity
-    // val memberVars = kson.memberVars // MemVariable[] of class member variables
+
+    val parentClass = kson.parentClassName // BaseAppCompatActivity
+    println("Parent class is $parentClass")
+
+    val memberVars = kson.memVars // MemVariable[] of class member variables
     //val memberMethod = kson.memberMeths // MemMethods[] of class member methods
 
     // Modification

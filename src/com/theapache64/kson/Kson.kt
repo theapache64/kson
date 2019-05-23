@@ -12,6 +12,7 @@ class Kson(
         val CLASS_NAME_REGEX = Pattern.compile("class (\\w+)")
         val PACKAGE_NAME_REGEX = Pattern.compile("package (.+)")
         val IMPORT_REGEX = Pattern.compile("import (.+)")
+        val PARENT_CLASS_NAME_REGEX = Pattern.compile("class .+:\\s*(\\w+)")
     }
 
     init {
@@ -22,7 +23,7 @@ class Kson(
     /**
      * To get class name
      */
-    val className: String
+    val className: String?
         get() {
             return parseSingle(CLASS_NAME_REGEX)
         }
@@ -31,15 +32,35 @@ class Kson(
     /**
      * To get package name
      */
-    val packageName: String
+    val packageName: String?
         get() {
             return parseSingle(PACKAGE_NAME_REGEX)
         }
 
 
+    /**
+     * To get imported packages
+     */
     val imports: List<String>
         get() {
             return parseMultiple(IMPORT_REGEX)
+        }
+
+    /**
+     * To get parent class name
+     */
+    val parentClassName: String?
+        get() {
+            return parseSingle(PARENT_CLASS_NAME_REGEX)
+        }
+
+    /**
+     * To get memeber variables
+     */
+    val memVars: List<Variable>
+        get() {
+            TODO("Not implemented. Dot it using reflection and also try to tranfer other params to reflection also.")
+            return mutableListOf()
         }
 
     private fun parseMultiple(pattern: Pattern): ArrayList<String> {
@@ -56,13 +77,13 @@ class Kson(
     /**
      * To parse with given pattern from kotlinFile
      */
-    private fun parseSingle(pattern: Pattern): String {
+    private fun parseSingle(pattern: Pattern): String? {
         val fileContents = kotlinFile.readText()
         val matcher = pattern.matcher(fileContents)
         if (matcher.find()) {
             return matcher.group(1)
         }
-        throw IllegalArgumentException("Failed to get class name")
+        return null
     }
 
 }
