@@ -24,6 +24,11 @@ fun main() {
     val className = kson.className // MyClass.kt
     println("Class name is $className")
 
+    // Changing class name
+    kson.className = "MyUpdatedClass"
+
+    println("Updated class name is ${kson.className}")
+
     val packageName = kson.packageName // com.company.lyrix.ui.activities.player
     println("Package name is $packageName")
 
@@ -33,7 +38,7 @@ fun main() {
     val parentClass = kson.parentClassName // BaseAppCompatActivity
     println("Parent class is $parentClass")
 
-    val memberVars = kson.memVars // MemVariable[] of class member variables
+    //val memberVars = kson.memVars // MemVariable[] of class member variables
     //val memberMethod = kson.memberMeths // MemMethods[] of class member methods
 
     // Modification

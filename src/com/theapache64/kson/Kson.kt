@@ -23,10 +23,17 @@ class Kson(
     /**
      * To get class name
      */
-    val className: String?
+    var className: String?
         get() {
             return parseSingle(CLASS_NAME_REGEX)
         }
+        set(value) {
+            setClassNameFrom(value)
+        }
+
+    private fun setClassNameFrom(className: String?) {
+
+    }
 
 
     /**
